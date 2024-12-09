@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FaceSwap App</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        .image-gallery {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .image-gallery img {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            cursor: pointer;
+        }
+        .container {
+            text-align: center;
+        }
+        .result {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Chọn ảnh mẫu và upload ảnh của bạn</h1>
+    <div class="image-gallery">
+        {% for image in image_files %}
+            <img src="{{ image }}" alt="Ảnh mẫu" class="target-image" onclick="selectImage(this)">
+        {% endfor %}
+    </div>
+
+    <div>
+        <input type="file" id="userImage" accept="image/*">
+        <button onclick="generateFaceSwap()">Generate</button>
+    </div>
+
+    <div class="result">
+        <h2>Ảnh kết quả</h2>
+        <img id="resultImage" src="" alt="Ảnh kết quả" style="display: none;">
+    </div>
+</div>
+
+<script>
+    let selectedImage = null;
+
+    // Chọn ảnh mẫu
+    function selectImage(imageElement) {
+        selectedImage = imageElement.src;
+        alert('Bạn đã chọn ảnh mẫu!');
+    }
+
+    // Hàm gọi API để thực hiện FaceSwap
+    function generateFaceSwap() {
+        let userImage = document.getElementById('userImage').files[0];
+        if (!userImage || !selectedImage) {
+            alert('Hãy chọn ảnh mẫu và upload ảnh của bạn!');
+            return;
+        }
+
+        // Tạo form dữ liệu
+        let formData = new FormData();
+        formData.append('file', userImage);
+        formData.append('target_image', selectedImage);
+
+        // Gửi yêu cầu upload ảnh và gọi Replicate API
+        $.ajax({
+            url: '/upload',
+            type: 'POST',
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function(response) {
+                // Hiển thị kết quả
+                document.getElementById('resultImage').src = response.swapped_image_url;
+                document.getElementById('resultImage').style.display = 'block';
+            },
+            error: function() {
+                alert('Đã có lỗi xảy ra trong quá trình xử lý ảnh!');
+            }
+        });
+    }
+</script>
+
+</body>
+</html>
