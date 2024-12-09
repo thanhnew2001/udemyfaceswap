@@ -56,8 +56,11 @@ def upload():
         )
 
         print(output)
+        # Assuming 'image' is a FileOutput object
+        file_output = output['image']
+
         # Lấy URL của ảnh đã xử lý từ Replicate
-        swapped_image_url = output.get("image")
+        swapped_image_url = file_output.url
 
         # Trả về URL của ảnh đã swap
         return jsonify({'swapped_image_url': swapped_image_url})
