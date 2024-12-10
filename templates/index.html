@@ -20,9 +20,19 @@
         .container {
             text-align: center;
         }
+
         .result {
-            margin-top: 20px;
+        display: flex; /* Use flexbox to arrange images in a row */
+        flex-wrap: wrap; /* Allow the images to wrap to the next line if there are too many */
+        gap: 10px; /* Add some spacing between the images */
         }
+
+        .result img {
+            width: 200px;  /* Set the width of each image to 200px */
+            height: auto;   /* Maintain the aspect ratio */
+            object-fit: cover;  /* Optional: ensure the image is cropped if it overflows */
+        }
+
     </style>
 </head>
 <body>
@@ -42,8 +52,9 @@
 
     <div class="result">
         <h2>Ảnh kết quả</h2>
-        <img id="resultImage" src="" alt="Ảnh kết quả" style="display: none;">
+        <!-- Images will be appended here -->
     </div>
+    
 </div>
 
 <script>
@@ -76,9 +87,11 @@
             processData: false,
             contentType: false,
             success: function(response) {
-                // Hiển thị kết quả
-                document.getElementById('resultImage').src = response.swapped_image_url;
-                document.getElementById('resultImage').style.display = 'block';
+                // Create a new img element
+                var newImage = document.createElement('img');
+                newImage.src = response.swapped_image_url;
+                newImage.alt = "Ảnh kết quả";
+                document.querySelector('.result').appendChild(newImage);
             },
             error: function() {
                 alert('Đã có lỗi xảy ra trong quá trình xử lý ảnh!');

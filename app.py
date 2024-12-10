@@ -37,7 +37,7 @@ def upload():
         return jsonify({'error': 'No selected file'}), 400
     if file and allowed_file(file.filename):
         filename = secure_filename(file.filename)
-        file_path = os.path.join('static/images', filename)
+        file_path = os.path.join('static/uploads/', filename)
         file.save(file_path)
 
         # Lấy ảnh mẫu từ form
