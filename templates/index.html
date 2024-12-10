@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,94 +12,175 @@
             gap: 10px;
             margin-bottom: 20px;
         }
+
         .image-gallery img {
             width: 150px;
             height: 150px;
             object-fit: cover;
             cursor: pointer;
         }
+
         .container {
             text-align: center;
         }
 
         .result {
-        display: flex; /* Use flexbox to arrange images in a row */
-        flex-wrap: wrap; /* Allow the images to wrap to the next line if there are too many */
-        gap: 10px; /* Add some spacing between the images */
+            display: flex;
+            /* Use flexbox to arrange images in a row */
+            flex-wrap: wrap;
+            /* Allow the images to wrap to the next line if there are too many */
+            gap: 10px;
+            /* Add some spacing between the images */
         }
 
         .result img {
-            width: 200px;  /* Set the width of each image to 200px */
-            height: auto;   /* Maintain the aspect ratio */
-            object-fit: cover;  /* Optional: ensure the image is cropped if it overflows */
+            width: 200px;
+            /* Set the width of each image to 200px */
+            height: auto;
+            /* Maintain the aspect ratio */
+            object-fit: cover;
+            /* Optional: ensure the image is cropped if it overflows */
         }
 
+        /* Container for the file input and button */
+        .upload-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-top: 20px;
+            justify-content: center;
+            /* Center the content horizontally */
+        }
+
+        /* Hide the default file input */
+        .file-input {
+            display: none;
+            /* Hide the default file input */
+        }
+
+        /* Style for the generate button */
+        .generate-button {
+            padding: 15px 30px;
+            /* Increase padding for a bigger button */
+            font-size: 18px;
+            /* Make the font larger */
+            color: white;
+            background-color: #4CAF50;
+            /* Green background */
+            border: none;
+            border-radius: 10px;
+            /* Rounded corners */
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+            /* Smooth transition for hover effect */
+            font-weight: bold;
+            /* Make the font bold */
+        }
+
+        /* Hover effect for the button */
+        .generate-button:hover {
+            background-color: #45a049;
+            /* Darker green when hovered */
+            transform: scale(1.05);
+            /* Slightly enlarge the button on hover */
+        }
+
+        /* Active effect for the button (when clicked) */
+        .generate-button:active {
+            background-color: #388e3c;
+            /* Even darker green when clicked */
+        }
+
+        /* Custom file input label */
+        .upload-container .file-input+.generate-button::before {
+            content: "Choose File";
+            /* Text to display when no file is selected */
+            display: inline-block;
+            padding: 12px 25px;
+            font-size: 16px;
+            color: white;
+            background-color: #007bff;
+            /* Blue background for the file input button */
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        /* Hover effect for the file input button label */
+        .upload-container .file-input+.generate-button:hover::before {
+            background-color: #0056b3;
+            /* Darker blue on hover */
+        }
     </style>
 </head>
+
 <body>
 
-<div class="container">
-    <h1>Chọn ảnh mẫu và upload ảnh của bạn</h1>
-    <div class="image-gallery">
-        {% for image in image_files %}
+    <div class="container">
+        <h1>Chọn ảnh mẫu và upload ảnh của bạn</h1>
+        <div class="image-gallery">
+            {% for image in image_files %}
             <img src="{{ image }}" alt="Ảnh mẫu" class="target-image" onclick="selectImage(this)">
-        {% endfor %}
+            {% endfor %}
+        </div>
+
+        <div class="upload-container">
+            <input type="file" id="userImage" accept="image/*" class="file-input">
+            <button onclick="generateFaceSwap()" class="generate-button">Generate</button>
+        </div>
+
+
+        <div class="result">
+            <h2>Ảnh kết quả</h2>
+            <!-- Images will be appended here -->
+        </div>
+
     </div>
 
-    <div>
-        <input type="file" id="userImage" accept="image/*">
-        <button onclick="generateFaceSwap()">Generate</button>
-    </div>
+    <script>
+        let selectedImage = null;
 
-    <div class="result">
-        <h2>Ảnh kết quả</h2>
-        <!-- Images will be appended here -->
-    </div>
-    
-</div>
-
-<script>
-    let selectedImage = null;
-
-    // Chọn ảnh mẫu
-    function selectImage(imageElement) {
-        selectedImage = imageElement.src;
-        alert('Bạn đã chọn ảnh mẫu!');
-    }
-
-    // Hàm gọi API để thực hiện FaceSwap
-    function generateFaceSwap() {
-        let userImage = document.getElementById('userImage').files[0];
-        if (!userImage || !selectedImage) {
-            alert('Hãy chọn ảnh mẫu và upload ảnh của bạn!');
-            return;
+        // Chọn ảnh mẫu
+        function selectImage(imageElement) {
+            selectedImage = imageElement.src;
+            alert('Bạn đã chọn ảnh mẫu!');
         }
 
-        // Tạo form dữ liệu
-        let formData = new FormData();
-        formData.append('file', userImage);
-        formData.append('target_image', selectedImage);
-
-        // Gửi yêu cầu upload ảnh và gọi Replicate API
-        $.ajax({
-            url: '/upload',
-            type: 'POST',
-            data: formData,
-            processData: false,
-            contentType: false,
-            success: function(response) {
-                // Create a new img element
-                var newImage = document.createElement('img');
-                newImage.src = response.swapped_image_url;
-                newImage.alt = "Ảnh kết quả";
-                document.querySelector('.result').appendChild(newImage);
-            },
-            error: function() {
-                alert('Đã có lỗi xảy ra trong quá trình xử lý ảnh!');
+        // Hàm gọi API để thực hiện FaceSwap
+        function generateFaceSwap() {
+            let userImage = document.getElementById('userImage').files[0];
+            if (!userImage || !selectedImage) {
+                alert('Hãy chọn ảnh mẫu và upload ảnh của bạn!');
+                return;
             }
-        });
-    }
-</script>
+
+            // Tạo form dữ liệu
+            let formData = new FormData();
+            formData.append('file', userImage);
+            formData.append('target_image', selectedImage);
+
+            // Gửi yêu cầu upload ảnh và gọi Replicate API
+            $.ajax({
+                url: '/upload',
+                type: 'POST',
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function (response) {
+                    // Create a new img element
+                    var newImage = document.createElement('img');
+                    newImage.src = response.swapped_image_url;
+                    newImage.alt = "Ảnh kết quả";
+                    document.querySelector('.result').appendChild(newImage);
+                },
+                error: function () {
+                    alert('Đã có lỗi xảy ra trong quá trình xử lý ảnh!');
+                }
+            });
+        }
+    </script>
 
 </body>
+
 </html>
