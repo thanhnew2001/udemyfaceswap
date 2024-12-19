@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FaceSwap App</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <style>
         .image-gallery {
@@ -135,6 +134,8 @@
 <!-- Badge Code - Do Not Change The Code -->
 <a class="hitCounter" href="https://visitorshitcounter.com/" target="_blank" title="Hit counter" data-name="f0ae812168f9de0e140995d14bbc5ccd|5|external|10000|#0099cc|#f5f5f5|small|s-hit">Hit Counter</a><script>document.write("<script type='text/javascript' src='https://visitorshitcounter.com/js/hitCounter.js?v="+Date.now()+"'><\/script>");</script>
 <!-- Badge Code End Here -->
+</body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script>
     let selectedImage = null;
 
@@ -239,7 +240,13 @@ async function generateFaceSwap() {
 
 
 </script>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-</body>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const firstTab = document.querySelector('#mainTabs a.nav-link'); // Select the first tab
+        if (firstTab) {
+            firstTab.click(); // Simulate a click on the first tab
+        }
+    });
+</script>
 </html>
+
