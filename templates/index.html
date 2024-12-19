@@ -42,16 +42,20 @@
 <div class="container py-5">
     <h1 class="text-center mb-4">Chọn ảnh mẫu và upload ảnh của bạn</h1>
 
-    <!-- Bootstrap Tabs for Albums -->
-    <ul class="nav nav-tabs" id="imageTabs" role="tablist">
-        {% for album, images in albums.items() %}
+   <!-- Bootstrap Tabs for Albums -->
+<ul class="nav nav-tabs" id="imageTabs" role="tablist">
+    {% for album, images in albums.items() %}
+        {% if album != 'uploads' %}  <!-- Exclude the 'uploads' folder -->
             <li class="nav-item" role="presentation">
                 <a class="nav-link {% if loop.first %}active{% endif %}" id="tab-{{ album }}-tab" data-bs-toggle="tab" href="#tab-{{ album }}" role="tab" aria-controls="tab-{{ album }}" aria-selected="true">{{ album }}</a>
             </li>
-        {% endfor %}
-    </ul>
-    <div class="tab-content mt-4" id="imageTabsContent">
-        {% for album, images in albums.items() %}
+        {% endif %}
+    {% endfor %}
+</ul>
+
+<div class="tab-content mt-4" id="imageTabsContent">
+    {% for album, images in albums.items() %}
+        {% if album != 'uploads' %}  <!-- Exclude the 'uploads' folder -->
             <div class="tab-pane fade {% if loop.first %}show active{% endif %}" id="tab-{{ album }}" role="tabpanel" aria-labelledby="tab-{{ album }}-tab">
                 <div class="image-gallery">
                     {% for image in images %}
@@ -59,8 +63,10 @@
                     {% endfor %}
                 </div>
             </div>
-        {% endfor %}
-    </div>
+        {% endif %}
+    {% endfor %}
+</div>
+
 
     <!-- Upload and Generate Section -->
     <div class="text-center">

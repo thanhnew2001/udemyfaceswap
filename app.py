@@ -81,4 +81,4 @@ def uploaded_file(filename):
 if __name__ == '__main__':
     if not os.path.exists(IMAGE_FOLDER):
         os.makedirs(IMAGE_FOLDER)
-    app.run(debug=True)
+    app.run(debug=True, port=7000)
