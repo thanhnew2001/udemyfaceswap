@@ -146,73 +146,83 @@
     // Handle user image upload
     document.getElementById('userImage').addEventListener('change', enableGenerateButton);
 
-    // Generate FaceSwap using fetch API
-    async function generateFaceSwap() {
-        let userImage = document.getElementById('userImage').files[0];
-        if (!userImage || !selectedImage) {
-            alert('Hãy chọn ảnh mẫu và upload ảnh của bạn!');
-            return;
-        }
-
-        const spinner = document.getElementById('spinner');
-        const generateButton = document.getElementById('generateButton');
-        spinner.style.display = 'inline-block';
-        generateButton.disabled = true;
-
-        let formData = new FormData();
-        formData.append('file', userImage);
-        formData.append('target_image', selectedImage);
-
-        try {
-            // Step 1: Upload the user image and selected target image to the server
-            const uploadResponse = await fetch('/upload', {
-                method: 'POST',
-                body: formData
-            });
-
-            if (!uploadResponse.ok) {
-                throw new Error('Upload failed');
-            }
-
-            const uploadData = await uploadResponse.json();
-
-            if (uploadData.error) {
-                throw new Error(uploadData.error);
-            }
-
-            // Step 2: Receive swapped image URL from the server
-            const swappedImageUrl = uploadData.swapped_image_url;
-
-            // Display swapped image in a card with a download button
-            const card = document.createElement('div');
-            card.classList.add('card');
-            
-            const img = document.createElement('img');
-            img.src = swappedImageUrl;
-            img.alt = "Ảnh kết quả";
-
-            const cardBody = document.createElement('div');
-            cardBody.classList.add('card-body');
-            
-            const downloadButton = document.createElement('a');
-            downloadButton.href = swappedImageUrl;
-            downloadButton.download = 'swapped_image.png'; // Default filename for download
-            downloadButton.innerHTML = `<i class="bi bi-download"></i> Download`;
-            downloadButton.classList.add('btn', 'btn-primary', 'mt-2');
-            downloadButton.target = '_blank';  // Open in a new tab
-            cardBody.appendChild(downloadButton);
-            card.appendChild(img);
-            card.appendChild(cardBody);
-            document.querySelector('.result').appendChild(card);
-
-        } catch (error) {
-            console.error('Error:', error);
-            alert('Đã có lỗi xảy ra trong quá trình xử lý ảnh!');
-        } finally {
-            spinner.style.display = 'none';
-            generateButton.disabled = false;
-        }
+   // Generate FaceSwap using fetch API
+async function generateFaceSwap() {
+    let userImage = document.getElementById('userImage').files[0];
+    if (!userImage || !selectedImage) {
+        alert('Hãy chọn ảnh mẫu và upload ảnh của bạn!');
+        return;
     }
+
+    const spinner = document.getElementById('spinner');
+    const generateButton = document.getElementById('generateButton');
+    spinner.style.display = 'inline-block';
+    generateButton.disabled = true;
+
+    let formData = new FormData();
+    formData.append('file', userImage);
+    formData.append('target_image', selectedImage);
+
+    try {
+        // Step 1: Upload the user image and selected target image to the server
+        const uploadResponse = await fetch('/upload', {
+            method: 'POST',
+            body: formData
+        });
+
+        if (!uploadResponse.ok) {
+            throw new Error('Upload failed');
+        }
+
+        const uploadData = await uploadResponse.json();
+
+        if (uploadData.error) {
+            throw new Error(uploadData.error);
+        }
+
+        // Step 2: Receive swapped image URL from the server
+        const swappedImageUrl = uploadData.swapped_image_url;
+
+        // Display swapped image in a card with a download button
+        const card = document.createElement('div');
+        card.classList.add('card');
+        
+        const img = document.createElement('img');
+        img.src = swappedImageUrl;
+        img.alt = "Ảnh kết quả";
+
+        const cardBody = document.createElement('div');
+        cardBody.classList.add('card-body');
+        
+        const downloadButton = document.createElement('a');
+        downloadButton.href = swappedImageUrl;
+        downloadButton.download = 'swapped_image.png'; // Default filename for download
+        downloadButton.innerHTML = `<i class="bi bi-download"></i> Download`;
+        downloadButton.classList.add('btn', 'btn-primary', 'mt-2');
+        
+        // Simulate download without opening a new tab
+        downloadButton.addEventListener('click', function (event) {
+            event.preventDefault();
+            const a = document.createElement('a');
+            a.href = swappedImageUrl;
+            a.download = 'swapped_image.png';  // Set the default filename
+            a.click();  // Simulate the click event to trigger download
+        });
+
+        cardBody.appendChild(downloadButton);
+        card.appendChild(img);
+        card.appendChild(cardBody);
+        document.querySelector('.result').appendChild(card);
+
+    } catch (error) {
+        console.error('Error:', error);
+        alert('Đã có lỗi xảy ra trong quá trình xử lý ảnh!');
+    } finally {
+        spinner.style.display = 'none';
+        generateButton.disabled = false;
+    }
+}
+
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
