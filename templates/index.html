@@ -198,7 +198,7 @@
             downloadButton.download = 'swapped_image.png'; // Default filename for download
             downloadButton.innerHTML = `<i class="bi bi-download"></i> Download`;
             downloadButton.classList.add('btn', 'btn-primary', 'mt-2');
-
+            downloadButton.target = '_blank';  // Open in a new tab
             cardBody.appendChild(downloadButton);
             card.appendChild(img);
             card.appendChild(cardBody);
