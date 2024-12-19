@@ -26,10 +26,24 @@
             border-color: #0d6efd;
         }
 
-        .result img {
-            width: 200px;
+        .result {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .card {
+            width: 18rem;
+        }
+
+        .card img {
+            width: 100%;
             height: auto;
-            margin: 10px;
+        }
+
+        .card-body {
+            text-align: center;
         }
 
         .spinner-border {
@@ -42,31 +56,30 @@
 <div class="container py-5">
     <h1 class="text-center mb-4">Chọn ảnh mẫu và upload ảnh của bạn</h1>
 
-   <!-- Bootstrap Tabs for Albums -->
-<ul class="nav nav-tabs" id="imageTabs" role="tablist">
-    {% for album, images in albums.items() %}
-        {% if album != 'uploads' %}  <!-- Exclude the 'uploads' folder -->
-            <li class="nav-item" role="presentation">
-                <a class="nav-link {% if loop.first %}active{% endif %}" id="tab-{{ album }}-tab" data-bs-toggle="tab" href="#tab-{{ album }}" role="tab" aria-controls="tab-{{ album }}" aria-selected="true">{{ album }}</a>
-            </li>
-        {% endif %}
-    {% endfor %}
-</ul>
+    <!-- Bootstrap Tabs for Albums -->
+    <ul class="nav nav-tabs" id="imageTabs" role="tablist">
+        {% for album, images in albums.items() %}
+            {% if album != 'uploads' %}  <!-- Exclude the 'uploads' folder -->
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link {% if loop.first %}active{% endif %}" id="tab-{{ album }}-tab" data-bs-toggle="tab" href="#tab-{{ album }}" role="tab" aria-controls="tab-{{ album }}" aria-selected="true">{{ album }}</a>
+                </li>
+            {% endif %}
+        {% endfor %}
+    </ul>
 
-<div class="tab-content mt-4" id="imageTabsContent">
-    {% for album, images in albums.items() %}
-        {% if album != 'uploads' %}  <!-- Exclude the 'uploads' folder -->
-            <div class="tab-pane fade {% if loop.first %}show active{% endif %}" id="tab-{{ album }}" role="tabpanel" aria-labelledby="tab-{{ album }}-tab">
-                <div class="image-gallery">
-                    {% for image in images %}
-                        <img src="{{ url_for('static', filename=image) }}" alt="Ảnh mẫu" class="target-image" onclick="selectImage(this)">
-                    {% endfor %}
+    <div class="tab-content mt-4" id="imageTabsContent">
+        {% for album, images in albums.items() %}
+            {% if album != 'uploads' %}  <!-- Exclude the 'uploads' folder -->
+                <div class="tab-pane fade {% if loop.first %}show active{% endif %}" id="tab-{{ album }}" role="tabpanel" aria-labelledby="tab-{{ album }}-tab">
+                    <div class="image-gallery">
+                        {% for image in images %}
+                            <img src="{{ url_for('static', filename=image) }}" alt="Ảnh mẫu" class="target-image" onclick="selectImage(this)">
+                        {% endfor %}
+                    </div>
                 </div>
-            </div>
-        {% endif %}
-    {% endfor %}
-</div>
-
+            {% endif %}
+        {% endfor %}
+    </div>
 
     <!-- Upload and Generate Section -->
     <div class="text-center">
@@ -80,7 +93,7 @@
     <!-- Result Section -->
     <div class="mt-5">
         <h2 class="text-center">Ảnh kết quả</h2>
-        <div class="result d-flex flex-wrap justify-content-center">
+        <div class="result">
             <!-- Images will be appended here -->
         </div>
     </div>
@@ -143,11 +156,27 @@
             // Step 2: Receive swapped image URL from the server
             const swappedImageUrl = uploadData.swapped_image_url;
 
-            // Display swapped image
-            var newImage = document.createElement('img');
-            newImage.src = swappedImageUrl;
-            newImage.alt = "Ảnh kết quả";
-            document.querySelector('.result').appendChild(newImage);
+            // Display swapped image in a card with a download button
+            const card = document.createElement('div');
+            card.classList.add('card');
+            
+            const img = document.createElement('img');
+            img.src = swappedImageUrl;
+            img.alt = "Ảnh kết quả";
+
+            const cardBody = document.createElement('div');
+            cardBody.classList.add('card-body');
+            
+            const downloadButton = document.createElement('a');
+            downloadButton.href = swappedImageUrl;
+            downloadButton.download = 'swapped_image.png'; // Default filename for download
+            downloadButton.innerHTML = `<i class="bi bi-download"></i> Download`;
+            downloadButton.classList.add('btn', 'btn-primary', 'mt-2');
+
+            cardBody.appendChild(downloadButton);
+            card.appendChild(img);
+            card.appendChild(cardBody);
+            document.querySelector('.result').appendChild(card);
 
         } catch (error) {
             console.error('Error:', error);
