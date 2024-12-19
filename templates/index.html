@@ -146,7 +146,7 @@
     // Handle user image upload
     document.getElementById('userImage').addEventListener('change', enableGenerateButton);
 
-   // Generate FaceSwap using fetch API
+ // Generate FaceSwap using fetch API
 async function generateFaceSwap() {
     let userImage = document.getElementById('userImage').files[0];
     if (!userImage || !selectedImage) {
@@ -194,25 +194,29 @@ async function generateFaceSwap() {
         const cardBody = document.createElement('div');
         cardBody.classList.add('card-body');
         
-        const downloadButton = document.createElement('a');
-        downloadButton.href = swappedImageUrl;
-        downloadButton.download = 'swapped_image.png'; // Default filename for download
+        // Create the download button
+        const downloadButton = document.createElement('button');
         downloadButton.innerHTML = `<i class="bi bi-download"></i> Download`;
         downloadButton.classList.add('btn', 'btn-primary', 'mt-2');
         
-        // Simulate download without opening a new tab
-        downloadButton.addEventListener('click', function (event) {
-            event.preventDefault();
-            const a = document.createElement('a');
-            a.href = swappedImageUrl;
-            a.download = 'swapped_image.png';  // Set the default filename
-            a.click();  // Simulate the click event to trigger download
-        });
+        // Create the invisible link element to trigger download
+        const downloadLink = document.createElement('a');
+        downloadLink.href = swappedImageUrl;
+        downloadLink.download = 'swapped_image.png';  // Default filename for download
+        downloadLink.style.display = 'none';  // Make sure the link is hidden
 
+        // Append the download link to the DOM
         cardBody.appendChild(downloadButton);
+        cardBody.appendChild(downloadLink);
+        
         card.appendChild(img);
         card.appendChild(cardBody);
         document.querySelector('.result').appendChild(card);
+
+        // Add event listener to the button to simulate the download
+        downloadButton.addEventListener('click', () => {
+            downloadLink.click();  // Programmatically click the hidden link to download the image
+        });
 
     } catch (error) {
         console.error('Error:', error);
@@ -222,6 +226,7 @@ async function generateFaceSwap() {
         generateButton.disabled = false;
     }
 }
+
 
 </script>
 
