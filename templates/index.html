@@ -69,6 +69,11 @@
             display: inline-block;
             margin-bottom: 0;
         }
+        .upload-file{
+            margin: 10px auto;
+            padding: 10px;
+
+        }
     </style>
 </head>
 <body class="bg-light">
@@ -91,7 +96,6 @@
         {% endif %}
     {% endfor %}
 </ul>
-
 <div class="tab-content mt-4" id="imageTabsContent">
     {% for album, images in albums.items() %}
         {% if album != 'uploads' %}  <!-- Exclude the 'uploads' folder -->
@@ -109,7 +113,9 @@
 
 
     <!-- Upload and Generate Section -->
-    <div class="text-center">
+    <div class="upload-file text-center">
+        <br/>
+        <h5>Upload file hình của bạn</h5>
         <input type="file" id="userImage" accept="image/*" class="form-control w-50 mx-auto mb-3">
         <button id="generateButton" class="btn btn-primary" onclick="generateFaceSwap()" disabled>Generate</button>
         <div class="spinner-border text-primary" id="spinner" role="status">
