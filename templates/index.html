@@ -194,29 +194,29 @@ async function generateFaceSwap() {
         const cardBody = document.createElement('div');
         cardBody.classList.add('card-body');
         
-        // Create the download button
         const downloadButton = document.createElement('button');
         downloadButton.innerHTML = `<i class="bi bi-download"></i> Download`;
         downloadButton.classList.add('btn', 'btn-primary', 'mt-2');
         
-        // Create the invisible link element to trigger download
-        const downloadLink = document.createElement('a');
-        downloadLink.href = swappedImageUrl;
-        downloadLink.download = 'swapped_image.png';  // Default filename for download
-        downloadLink.style.display = 'none';  // Make sure the link is hidden
+        // Create the Blob and download functionality
+        downloadButton.addEventListener('click', async () => {
+            try {
+                const response = await fetch(swappedImageUrl);
+                const blob = await response.blob();
+                const link = document.createElement('a');
+                link.href = URL.createObjectURL(blob);
+                link.download = 'swapped_image.png'; // Specify the file name
+                link.click(); // Trigger download
+            } catch (error) {
+                console.error('Error downloading the image:', error);
+                alert('Failed to download the image.');
+            }
+        });
 
-        // Append the download link to the DOM
         cardBody.appendChild(downloadButton);
-        cardBody.appendChild(downloadLink);
-        
         card.appendChild(img);
         card.appendChild(cardBody);
         document.querySelector('.result').appendChild(card);
-
-        // Add event listener to the button to simulate the download
-        downloadButton.addEventListener('click', () => {
-            downloadLink.click();  // Programmatically click the hidden link to download the image
-        });
 
     } catch (error) {
         console.error('Error:', error);
@@ -226,6 +226,7 @@ async function generateFaceSwap() {
         generateButton.disabled = false;
     }
 }
+
 
 
 </script>
