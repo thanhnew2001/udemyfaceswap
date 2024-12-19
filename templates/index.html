@@ -4,104 +4,155 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FaceSwap App</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
         .image-gallery {
             display: flex;
+            flex-wrap: wrap;
             gap: 10px;
-            margin-bottom: 20px;
+            justify-content: center;
         }
+
         .image-gallery img {
             width: 150px;
             height: 150px;
             object-fit: cover;
             cursor: pointer;
-        }
-        .container {
-            text-align: center;
+            border: 2px solid transparent;
         }
 
-        .result {
-        display: flex; /* Use flexbox to arrange images in a row */
-        flex-wrap: wrap; /* Allow the images to wrap to the next line if there are too many */
-        gap: 10px; /* Add some spacing between the images */
+        .image-gallery img.selected {
+            border-color: #0d6efd;
         }
 
         .result img {
-            width: 200px;  /* Set the width of each image to 200px */
-            height: auto;   /* Maintain the aspect ratio */
-            object-fit: cover;  /* Optional: ensure the image is cropped if it overflows */
+            width: 200px;
+            height: auto;
+            margin: 10px;
         }
 
-        
-
+        .spinner-border {
+            display: none;
+        }
     </style>
 </head>
-<body>
+<body class="bg-light">
 
-<div class="container">
-    <h1>Chọn ảnh mẫu và upload ảnh của bạn</h1>
-    <div class="image-gallery">
-        {% for image in image_files %}
-            <img src="{{ image }}" alt="Ảnh mẫu" class="target-image" onclick="selectImage(this)">
+<div class="container py-5">
+    <h1 class="text-center mb-4">Chọn ảnh mẫu và upload ảnh của bạn</h1>
+
+    <!-- Bootstrap Tabs for Albums -->
+    <ul class="nav nav-tabs" id="imageTabs" role="tablist">
+        {% for album, images in albums.items() %}
+            <li class="nav-item" role="presentation">
+                <a class="nav-link {% if loop.first %}active{% endif %}" id="tab-{{ album }}-tab" data-bs-toggle="tab" href="#tab-{{ album }}" role="tab" aria-controls="tab-{{ album }}" aria-selected="true">{{ album }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+    <div class="tab-content mt-4" id="imageTabsContent">
+        {% for album, images in albums.items() %}
+            <div class="tab-pane fade {% if loop.first %}show active{% endif %}" id="tab-{{ album }}" role="tabpanel" aria-labelledby="tab-{{ album }}-tab">
+                <div class="image-gallery">
+                    {% for image in images %}
+                        <img src="{{ url_for('static', filename=image) }}" alt="Ảnh mẫu" class="target-image" onclick="selectImage(this)">
+                    {% endfor %}
+                </div>
+            </div>
         {% endfor %}
     </div>
 
-    <div class="upload-container">
-        <input type="file" id="userImage" accept="image/*" class="file-input">
-        <button onclick="generateFaceSwap()" class="generate-button">Generate</button>
+    <!-- Upload and Generate Section -->
+    <div class="text-center">
+        <input type="file" id="userImage" accept="image/*" class="form-control w-50 mx-auto mb-3">
+        <button id="generateButton" class="btn btn-primary" onclick="generateFaceSwap()" disabled>Generate</button>
+        <div class="spinner-border text-primary" id="spinner" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
     </div>
-    
 
-    <div class="result">
-        <h2>Ảnh kết quả</h2>
-        <!-- Images will be appended here -->
+    <!-- Result Section -->
+    <div class="mt-5">
+        <h2 class="text-center">Ảnh kết quả</h2>
+        <div class="result d-flex flex-wrap justify-content-center">
+            <!-- Images will be appended here -->
+        </div>
     </div>
-    
 </div>
 
 <script>
     let selectedImage = null;
 
-    // Chọn ảnh mẫu
-    function selectImage(imageElement) {
-        selectedImage = imageElement.src;
-        alert('Bạn đã chọn ảnh mẫu!');
+    // Enable the Generate button when both images are selected
+    function enableGenerateButton() {
+        const userImage = document.getElementById('userImage').files.length > 0;
+        document.getElementById('generateButton').disabled = !(userImage && selectedImage);
     }
 
-    // Hàm gọi API để thực hiện FaceSwap
-    function generateFaceSwap() {
+    // Select sample image
+    function selectImage(imageElement) {
+        document.querySelectorAll('.target-image').forEach(img => img.classList.remove('selected'));
+        imageElement.classList.add('selected');
+        selectedImage = imageElement.src;
+        enableGenerateButton();
+    }
+
+    // Handle user image upload
+    document.getElementById('userImage').addEventListener('change', enableGenerateButton);
+
+    // Generate FaceSwap using fetch API
+    async function generateFaceSwap() {
         let userImage = document.getElementById('userImage').files[0];
         if (!userImage || !selectedImage) {
             alert('Hãy chọn ảnh mẫu và upload ảnh của bạn!');
             return;
         }
 
-        // Tạo form dữ liệu
+        const spinner = document.getElementById('spinner');
+        const generateButton = document.getElementById('generateButton');
+        spinner.style.display = 'inline-block';
+        generateButton.disabled = true;
+
         let formData = new FormData();
         formData.append('file', userImage);
         formData.append('target_image', selectedImage);
 
-        // Gửi yêu cầu upload ảnh và gọi Replicate API
-        $.ajax({
-            url: '/upload',
-            type: 'POST',
-            data: formData,
-            processData: false,
-            contentType: false,
-            success: function(response) {
-                // Create a new img element
-                var newImage = document.createElement('img');
-                newImage.src = response.swapped_image_url;
-                newImage.alt = "Ảnh kết quả";
-                document.querySelector('.result').appendChild(newImage);
-            },
-            error: function() {
-                alert('Đã có lỗi xảy ra trong quá trình xử lý ảnh!');
+        try {
+            // Step 1: Upload the user image and selected target image to the server
+            const uploadResponse = await fetch('/upload', {
+                method: 'POST',
+                body: formData
+            });
+
+            if (!uploadResponse.ok) {
+                throw new Error('Upload failed');
             }
-        });
+
+            const uploadData = await uploadResponse.json();
+
+            if (uploadData.error) {
+                throw new Error(uploadData.error);
+            }
+
+            // Step 2: Receive swapped image URL from the server
+            const swappedImageUrl = uploadData.swapped_image_url;
+
+            // Display swapped image
+            var newImage = document.createElement('img');
+            newImage.src = swappedImageUrl;
+            newImage.alt = "Ảnh kết quả";
+            document.querySelector('.result').appendChild(newImage);
+
+        } catch (error) {
+            console.error('Error:', error);
+            alert('Đã có lỗi xảy ra trong quá trình xử lý ảnh!');
+        } finally {
+            spinner.style.display = 'none';
+            generateButton.disabled = false;
+        }
     }
 </script>
 
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
