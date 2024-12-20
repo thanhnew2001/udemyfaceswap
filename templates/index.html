@@ -215,26 +215,26 @@ async function generateFaceSwap() {
         const cardBody = document.createElement('div');
         cardBody.classList.add('card-body');
         
-        const downloadButton = document.createElement('button');
-        downloadButton.innerHTML = `<i class="bi bi-download"></i> Download`;
-        downloadButton.classList.add('btn', 'btn-primary', 'mt-2');
+        // const downloadButton = document.createElement('button');
+        // downloadButton.innerHTML = `<i class="bi bi-download"></i> Download`;
+        // downloadButton.classList.add('btn', 'btn-primary', 'mt-2');
         
-        // Create the Blob and download functionality
-        downloadButton.addEventListener('click', async () => {
-            try {
-                const response = await fetch(swappedImageUrl);
-                const blob = await response.blob();
-                const link = document.createElement('a');
-                link.href = URL.createObjectURL(blob);
-                link.download = 'swapped_image.png'; // Specify the file name
-                link.click(); // Trigger download
-            } catch (error) {
-                console.error('Error downloading the image:', error);
-                alert('Failed to download the image.');
-            }
-        });
+        // // Create the Blob and download functionality
+        // downloadButton.addEventListener('click', async () => {
+        //     try {
+        //         const response = await fetch(swappedImageUrl);
+        //         const blob = await response.blob();
+        //         const link = document.createElement('a');
+        //         link.href = URL.createObjectURL(blob);
+        //         link.download = 'swapped_image.png'; // Specify the file name
+        //         link.click(); // Trigger download
+        //     } catch (error) {
+        //         console.error('Error downloading the image:', error);
+        //         alert('Failed to download the image.');
+        //     }
+        // });
+        // cardBody.appendChild(downloadButton);
 
-        cardBody.appendChild(downloadButton);
         card.appendChild(img);
         card.appendChild(cardBody);
         document.querySelector('.result').appendChild(card);
