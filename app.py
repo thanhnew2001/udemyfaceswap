@@ -69,6 +69,7 @@ def upload():
 
             # Assuming 'image' is the URL of the processed image
             swapped_image_url = output['image']
+            print(swapped_image_url)
             response = requests.get(swapped_image_url)
 
             if response.status_code == 200:
