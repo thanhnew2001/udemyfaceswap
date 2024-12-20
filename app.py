@@ -72,7 +72,7 @@ def upload():
             if response.status_code == 200:
                 # Save the swapped image on the server
                 generated_filename = f"swapped_{filename}"
-                generated_file_path = os.path.join(app.config['GENERATED_FOLDER'], generated_filename)
+                generated_file_path = os.path.join(app.config['RESULT_FOLDER'], generated_filename)
                 with open(generated_file_path, 'wb') as f:
                     f.write(response.content)
 
