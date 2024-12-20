@@ -79,13 +79,13 @@ def upload():
                 with open(generated_file_path, 'wb') as f:
                     f.write(response.content)
                    # Force HTTPS in the response URL
-                    if request.is_secure:
-                        protocol = 'https://'
-                    else:
-                        protocol = 'https://'  # Force https even if the request is HTTP
+                    # if request.is_secure:
+                    #     protocol = 'https://'
+                    # else:
+                    #     protocol = 'https://'  # Force https even if the request is HTTP
                     
                     # Construct the full URL of the generated image
-                    swapped_image_url = f"{protocol}{request.host}{generated_file_path}"
+                    swapped_image_url = f"https://{request.host}{generated_file_path}"
 
                 # Return the path of the saved image
                 return jsonify({
