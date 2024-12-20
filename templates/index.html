@@ -93,7 +93,7 @@
     <!-- Tabs for Albums -->
     <ul class="nav nav-tabs" id="imageTabs" role="tablist">
         {% for album, images in albums.items() %}
-            {% if album != 'uploads' %}
+            {% if album != 'uploads' and album != 'results' %}
                 <li class="nav-item" role="presentation">
                     <a class="nav-link {% if loop.first %}active{% endif %}" id="tab-{{ album }}-tab" data-bs-toggle="tab" href="#tab-{{ album }}" role="tab" aria-controls="tab-{{ album }}" aria-selected="true">{{ album }}</a>
                 </li>
@@ -103,7 +103,7 @@
 
     <div class="tab-content mt-4" id="imageTabsContent">
         {% for album, images in albums.items() %}
-            {% if album != 'uploads' %}
+            {% if album != 'uploads' and album != 'results' %}
                 <div class="tab-pane fade {% if loop.first %}show active{% endif %}" id="tab-{{ album }}" role="tabpanel" aria-labelledby="tab-{{ album }}-tab">
                     <div class="image-gallery">
                         {% for image in images %}

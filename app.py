@@ -7,6 +7,7 @@ import requests
 app = Flask(__name__)
 
 # Configure upload and result folders
+PHOTO_FOLDER = 'static'
 UPLOAD_FOLDER = 'static/uploads'
 RESULT_FOLDER = 'static/results'
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'webp'}
@@ -27,8 +28,8 @@ def allowed_file(filename):
 def index():
     # List albums and images for display
     albums = {}
-    for album_name in os.listdir(UPLOAD_FOLDER):
-        album_path = os.path.join(UPLOAD_FOLDER, album_name)
+    for album_name in os.listdir(PHOTO_FOLDER):
+        album_path = os.path.join(PHOTO_FOLDER, album_name)
         if os.path.isdir(album_path):
             album_images = [
                 f"{album_name}/{f}" for f in os.listdir(album_path) if allowed_file(f)
