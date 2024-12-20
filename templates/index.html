@@ -209,15 +209,18 @@
             // Create a hidden <a> element for downloading the image
             downloadButton.addEventListener('click', () => {
                 const link = document.createElement('a');
-                link.href = swappedImageUrl;   // Image URL
+                link.href = swappedImageUrl; // Image URL
                 link.download = 'swapped_image.png';  // Name of the file to be saved
-                link.style.display = 'none';   // Hide the link element
 
-                // Append the link to the document, trigger the download, and remove it afterward
+                // Ensure the link is hidden
+                link.style.display = 'none';
+
+                // Append the link to the body, trigger the download, and remove it afterward
                 document.body.appendChild(link);
-                link.click();
-                document.body.removeChild(link);
+                link.click();  // Trigger the download
+                document.body.removeChild(link);  // Remove the link element
             });
+
 
             cardBody.appendChild(downloadButton);
             card.appendChild(img);
