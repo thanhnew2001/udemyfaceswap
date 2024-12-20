@@ -53,15 +53,13 @@ def upload():
         # Get target image URL from the form
         target_image_url = request.form.get('target_image')
 
-        # Call Replicate API for FaceSwap
-        replicate_client = replicate.Client(api_token="YOUR_API_TOKEN")
         input_data = {
             "local_source": f"{request.host_url}{file_path}",
             "local_target": target_image_url
         }
 
         try:
-            output = replicate_client.run(
+            output = replicate.run(
                 "xiankgx/face-swap:cff87316e31787df12002c9e20a78a017a36cb31fde9862d8dedd15ab29b7288",
                 input=input_data
             )
