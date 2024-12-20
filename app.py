@@ -38,7 +38,6 @@ def index():
 
     return render_template('index.html', albums=albums)
 
-# API to upload image and perform face swap
 @app.route('/upload', methods=['POST'])
 def upload():
     if 'file' not in request.files:
@@ -51,45 +50,45 @@ def upload():
         file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
         file.save(file_path)
 
-        # Get target image URL from form
+        # Get target image URL from the form
         target_image_url = request.form.get('target_image')
-        if not target_image_url:
-            return jsonify({'error': 'No target image provided'}), 400
 
-        # Call Replicate API for face swap
+        # Call Replicate API for FaceSwap
+        replicate_client = replicate.Client(api_token="YOUR_API_TOKEN")
         input_data = {
-            "local_source": f"http://localhost:7000/{file_path}",
-            "local_target": target_image_url,
+            "local_source": f"{request.host_url}{file_path}",
+            "local_target": target_image_url
         }
 
         try:
-            output = replicate.run(
+            output = replicate_client.run(
                 "xiankgx/face-swap:cff87316e31787df12002c9e20a78a017a36cb31fde9862d8dedd15ab29b7288",
                 input=input_data
             )
-        except Exception as e:
-            return jsonify({'error': str(e)}), 500
+            print(output)
 
-        # Download the processed image to the server
-        swapped_image_url = output['image']['url']
-        swapped_image_path = os.path.join(app.config['RESULT_FOLDER'], filename)
+            # Assuming 'image' is the URL of the processed image
+            swapped_image_url = output['image']
+            response = requests.get(swapped_image_url)
 
-        try:
-            response = requests.get(swapped_image_url, stream=True)
             if response.status_code == 200:
-                with open(swapped_image_path, 'wb') as f:
-                    for chunk in response.iter_content(1024):
-                        f.write(chunk)
+                # Save the swapped image on the server
+                generated_filename = f"swapped_{filename}"
+                generated_file_path = os.path.join(app.config['GENERATED_FOLDER'], generated_filename)
+                with open(generated_file_path, 'wb') as f:
+                    f.write(response.content)
+
+                # Return the path of the saved image
+                return jsonify({
+                    'swapped_image_url': f"{request.host_url}{generated_file_path}"
+                })
             else:
-                return jsonify({'error': 'Failed to download processed image'}), 500
+                return jsonify({'error': 'Failed to download the generated image'}), 500
         except Exception as e:
-            return jsonify({'error': str(e)}), 500
+            print("Error calling Replicate API:", e)
+            return jsonify({'error': 'An error occurred while processing the request'}), 500
 
-        # Return the URL of the locally saved result image
-        result_url = url_for('download_file', filename=filename)
-        return jsonify({'swapped_image_url': result_url})
-
-    return jsonify({'error': 'Invalid file'}), 400
+    return jsonify({'error': 'File type not allowed'}), 400
 
 # API to serve processed files for download
 @app.route('/results/<filename>')
