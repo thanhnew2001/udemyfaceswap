@@ -3,6 +3,8 @@ from flask import Flask, render_template, request, jsonify, send_from_directory,
 from werkzeug.utils import secure_filename
 import replicate
 import requests
+import uuid
+
 
 app = Flask(__name__)
 
@@ -71,7 +73,8 @@ def upload():
 
             if response.status_code == 200:
                 # Save the swapped image on the server
-                generated_filename = f"swapped_{filename}"
+                unique_id = uuid.uuid4()
+                generated_filename = f"swapped_{unique_id}.png"
                 generated_file_path = os.path.join(app.config['RESULT_FOLDER'], generated_filename)
                 with open(generated_file_path, 'wb') as f:
                     f.write(response.content)
