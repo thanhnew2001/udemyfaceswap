@@ -85,6 +85,13 @@
         <p>Hình đẹp lấy ngay, thợ chụp khỏi hẹn ngày</p>
     </div>
 
+    <div class="upload-file text-center">
+        <br/>
+        <h5>Bước 1. Chọn mẫu bạn yêu thích</h5>
+        <p>Chọn chủ đề (xmas, creative, ...), sau đó chọn ảnh mẫu bạn muốn chụp</p>
+
+    </div>
+        
   <!-- Bootstrap Tabs for Albums -->
 <ul class="nav nav-tabs" id="imageTabs" role="tablist">
     {% for album, images in albums.items() %}
@@ -114,9 +121,13 @@
     <!-- Upload and Generate Section -->
     <div class="upload-file text-center">
         <br/>
-        <h5>Upload file hình của bạn</h5>
+        <h5>Bước 2. Tải file hình của bạn lên</h5>
+        <p>Hình có chứa khuân mặt chụp thẳng, rõ nét</p>
         <input type="file" id="userImage" accept="image/*" class="form-control w-50 mx-auto mb-3">
-        <button id="generateButton" class="btn btn-primary" onclick="generateFaceSwap()" disabled>Generate</button>
+        <button id="generateButton" class="btn btn-primary" onclick="generateFaceSwap()" disabled>Tạo ảnh</button>
+        <br/><br/>
+        <p>Lưu ý: nút Tạo ảnh chỉ có thể hoạt động khi bạn đã chọn mẫu ảnh, và chọn ảnh tải lên</p>
+        <p>Nếu có lỗi xảy ra, vui lòng chờ khoảng 5s, sau đó làm lại</p>
         <div class="spinner-border text-primary" id="spinner" role="status">
             <span class="visually-hidden">Loading...</span>
         </div>
