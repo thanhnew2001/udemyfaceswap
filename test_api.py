@@ -1,87 +1,9 @@
-swapped_008e075b-adf9-4821-bfa8-b0448db44ab8.png  swapped_63e9b271-0165-48c6-a674-3429fdf9129e.png  swapped_b644d9bc-b89e-4d9b-980a-6aeb9cd3428f.png
-swapped_0355ec5b-2a99-4518-9ec1-c09403e681f8.png  swapped_640912d4-cdae-425a-85bc-ee1a91dd4c9e.png  swapped_b92b1173-5496-4a46-a48b-e61c78fcb479.png
-swapped_044398ec-fe38-46ba-aea8-4d068266d8bf.png  swapped_649cd0aa-28dd-463b-bfa0-565350fc7759.png  swapped_ba3186dc-b740-40ba-bae7-6cc1d3b6a301.png
-swapped_04a8c847-2fad-4bbd-8a71-6fe14e737197.png  swapped_673a21bf-2093-40a2-9314-b243353b4b9e.png  swapped_bb453951-edaa-495f-a6c1-a7b6a25431d3.png
-swapped_0532c6b3-6ed4-43cf-8bb7-868fba4b2ac9.png  swapped_67f970e9-f16c-4b2f-8246-94fd2fdf535f.png  swapped_bc81dd7a-575a-4d48-ab89-753469131ab7.png
-swapped_05c6b19c-dd6f-4d0c-b496-9ac5babb51a3.png  swapped_68e39846-7899-4849-a7d3-f41c421b0aa3.png  swapped_bdc06c34-73b4-4bd6-a5b9-f13ca849e354.png
-swapped_07e98a3e-fc48-4798-99fc-46fca160b973.png  swapped_68f9c83c-e78b-4d06-8c09-0c499405fbcd.png  swapped_bece3bf6-0cd2-4d1d-b063-6d8ef1be1c02.png
-swapped_0936e5b1-5afb-4b38-866b-44bb8cc57ba9.png  swapped_693fcd53-1238-4759-b5f3-c416f77e7734.png  swapped_bf6de1b4-7c47-4a94-8352-92e0f6daee50.png
-swapped_0a65f46f-2da8-4597-9e0e-f8bd9293f69c.png  swapped_6944b1e1-bcfe-4980-848d-d11203682957.png  swapped_bfda1a48-a745-495b-8cbf-d32659449b94.png
-swapped_0ac76a25-537a-492f-8cdf-fb195206136a.png  swapped_699f263a-20b6-4ac4-8f9c-56d426949117.png  swapped_c2510ec5-db80-4682-9dca-b9208017435e.png
-swapped_0ae1e65e-1355-4c31-b651-7b903603d95d.png  swapped_6a989c73-2106-494b-809f-6a0fc42b1730.png  swapped_c47716fe-2f20-4d10-9846-a25f5384f45f.png
-swapped_0c09d413-9766-45b2-bc47-67f316a7dd30.png  swapped_6b78deb9-b141-4369-81fe-bb6409fed326.png  swapped_c62d0c6c-c92d-4fec-933d-996c8ac189c4.png
-swapped_0c1356af-ad2e-44e0-91f6-7cbe6142ba9f.png  swapped_6cd4f637-92d6-4989-b862-1315c14e5680.png  swapped_c760db66-6402-4545-b417-ba8d7073ace7.png
-swapped_0c532178-4604-41fb-a088-0d9f6aae6e80.png  swapped_6e4916df-e639-442c-b441-1b8481f36a33.png  swapped_c77da234-5da6-4998-84b5-a8b33a7540d9.png
-swapped_0c6ffa2a-3884-4480-a6ed-9ca3d2c5d37b.png  swapped_6ebfb8c5-b792-43ff-aec2-796aa0d2e9a7.png  swapped_c7bf21f3-d03e-4279-b5c0-b77f740d31a8.png
-swapped_0d78ddef-09b1-473e-8d44-5a006eed70df.png  swapped_6fd2caca-2289-4ae7-9dcf-aa6ef14233e4.png  swapped_c87339fb-255e-405c-94a0-7dfc5a1da079.png
-swapped_0f30c7fd-e30d-4383-84bd-4c9c426cfc77.png  swapped_71162a63-2e5f-4798-b6e7-b0e6b300d1a5.png  swapped_c8d52ba6-134b-4f27-96dd-7263f0cbd66b.png
-swapped_0f7c8d8b-5f7e-474d-a610-529741e897cd.png  swapped_72476272-d5bb-4077-b54f-dda0ba5a0092.png  swapped_ca29203e-5d67-410d-9705-d79313e3b3e5.png
-swapped_0f890a86-f23d-451d-9378-ad957894fac3.png  swapped_736043c6-fe1d-4f13-abe2-5de93cfa94fa.png  swapped_ca36ad0f-4faa-4309-bba5-1d667ece98e5.png
-swapped_0f9b7ee2-5c1b-4696-b248-6bb2fcca109e.png  swapped_74996659-3e36-4897-9104-be752bc70b1b.png  swapped_cd08f659-4a2c-487c-8855-985565defd88.png
-swapped_101ebc0b-791b-47f1-bfad-b7442fc2552d.png  swapped_74a1dd10-bca4-4966-823d-c96dc792bb15.png  swapped_cdf62b72-bc6c-4a79-8f76-5c5e0c4e5b63.png
-swapped_10292223-da39-47f5-aeac-e9e8e1ea9751.png  swapped_74ba4971-da1c-4ec7-815c-2a2e0c26e256.png  swapped_cea121d7-8fb9-4fb7-a730-aba8f86f5cd1.png
-swapped_1112898c-c4da-4edb-bd8e-975f6691731b.png  swapped_74de0f6f-363e-4e58-8738-f0d1e2ed4134.png  swapped_cf13e85a-570d-441a-81bf-c1c16a6cc32d.png
-swapped_133370b4-bace-4370-86f2-f1b95b60c3bf.png  swapped_77211e9e-34ef-4d0c-abb0-0ebb8476b2bf.png  swapped_cffad20a-d66e-4b6b-814f-cc2fc3916582.png
-swapped_13c3fab1-d348-443c-a8f2-7335e99b9c89.png  swapped_77923667-aef6-495a-9373-7a3b13b35e4c.png  swapped_d0187148-7f1b-41d0-8780-fd1f6d95d173.png
-swapped_143d98a0-131a-4b99-8826-0c5cc5bfe780.png  swapped_786940cf-14d0-498b-96f2-139f47b98b41.png  swapped_d0654fa2-81b0-4613-9684-37e565cbff3a.png
-swapped_17b93021-129e-4d87-9369-54a4ce608522.png  swapped_7a2ebf16-f097-4c7e-b5c4-5bde3df78bcf.png  swapped_d0af9ea8-5a28-4490-84bc-cbf70c75a590.png
-swapped_1807d0da-fb72-4c5c-97b7-b803fcb722fb.png  swapped_7a8a0959-7428-4e14-a94f-34cd6060af2e.png  swapped_d30c2c92-11cf-434f-b11d-e377889f5455.png
-swapped_1918b245-8ac4-4005-9584-55908ab3d6b6.png  swapped_7a8b6010-07de-4648-9613-5a1e98c0b20f.png  swapped_d3a822fb-d5c0-449b-b4b1-bc9603e19386.png
-swapped_1af86058-cfb2-4930-85cd-191cf460c81e.png  swapped_7aa0fcd0-f4e0-4908-8371-69317594b865.png  swapped_d40f3feb-7c7b-4630-a586-b334b79a1d2c.png
-swapped_1dae3f21-be1f-4119-8e0a-130dde09bcff.png  swapped_7bf35b35-c1f3-4452-9e3f-c906a70ec712.png  swapped_d5f73a62-0011-43d1-ad4c-7ae953a5a003.png
-swapped_1e72d01e-47a4-4a94-a4d3-b9274f8e6c61.png  swapped_7c35d1d8-414a-4c3f-8305-69bb812a0c01.png  swapped_d66afbd3-a20c-4016-bfb0-cb098fedc38a.png
-swapped_1f7efbc7-e92f-4a1d-b757-7560d72d7690.png  swapped_7c3fb699-9ca6-44be-b09d-491102bb398d.png  swapped_d6ac0182-85b6-4492-affe-3e7f5acfbd2f.png
-swapped_24395a10-18b8-4a86-a13f-99b4038332ba.png  swapped_7d400fbe-0993-4e91-abc5-0dec074bbfa9.png  swapped_d73b5f41-8591-4dfc-a73d-4a2cfef7c3bd.png
-swapped_2637401a-9830-4160-8c7a-0926a4d7955a.png  swapped_7dde255c-110d-4df2-ad98-8d1473747792.png  swapped_d77ea684-c508-44cc-af91-90ea5fae863a.png
-swapped_264bedab-d5de-48aa-9b26-8ceadc2ee9dc.png  swapped_7de9e5c7-b594-4722-b1cf-fe96bb7d96c4.png  swapped_d7d158d8-bbbe-4ce7-bf1d-c390103202ee.png
-swapped_2662345d-1d53-4c86-8852-a89bd2f67392.png  swapped_7f187b5e-4af8-42de-a7c9-90a22d989f23.png  swapped_d8255ea3-ae23-478e-adf3-6f233ee24b38.png
-swapped_27049941-0729-434a-b2b1-12b13326b7dc.png  swapped_82811d9b-865c-4827-b083-7886a7f6c40a.png  swapped_d88b8416-29e2-478a-a42e-644094ed95c3.png
-swapped_27af915b-ca85-418c-a168-b3c712958e0a.png  swapped_82be2229-37a6-402a-8072-2fa05d4ced24.png  swapped_d9785e6e-4821-40f4-9270-296d6fead2fa.png
-swapped_27f048a9-aac6-4ff9-a5c1-ef04a3c3b2f4.png  swapped_82d80a32-6120-4604-a120-ff83dcd3397a.png  swapped_da1ff9dc-c3f1-45f8-9075-9beb47b18b62.png
-swapped_2bbf893f-d75f-4e58-9795-47a7080496a5.png  swapped_8338747d-b551-4449-ab6a-5a1b06f27ef7.png  swapped_dac9af16-bf48-404d-b4a4-1de1ee24c83a.png
-swapped_2bca3226-6d62-43b9-a8bb-e59fa3e3d2df.png  swapped_853165c4-e0bc-4745-88e8-489002d7cb52.png  swapped_db802eb1-9ecc-444a-8a81-9c85d7e7cda2.png
-swapped_2d8afdc8-69f7-40b8-b147-ec57eeba9c52.png  swapped_85804480-3112-4dbf-8145-33666e92935f.png  swapped_db82bc7e-be74-4068-a02c-5f67bc99639b.png
-swapped_2dcb8f84-9928-4300-a4bf-dba661e28134.png  swapped_889a98ee-76fe-4b5a-870c-5593e018df25.png  swapped_dc4ba972-f66b-490c-939c-4be859a7822c.png
-swapped_2ec98c34-5996-4875-9026-a927d56a96d4.png  swapped_890775c6-7df8-451a-bf16-5ed36c95f270.png  swapped_de3cb243-2ebf-4630-8bc0-f3d15856a559.png
-swapped_30ba60d0-7a58-428e-b5f0-ea504a9f6440.png  swapped_890f7a0c-c570-42f3-981f-4b8eba1b4ac6.png  swapped_de832efa-be35-416b-98d2-0870aef602e3.png
-swapped_32352068-09c8-42e9-aec2-d816c6e65f94.png  swapped_893ca387-1866-4d6b-b7d4-61b4d198f6be.png  swapped_deefae38-481c-42af-b6d4-1210bbba805b.png
-swapped_33413676-fc7f-4d92-b7bd-558966e4591c.png  swapped_8a5366b0-a8a3-478a-8573-9cf86e1fe260.png  swapped_def971ad-e6d0-4527-a79b-3ccde16d46da.png
-swapped_3387ea02-b616-493e-9d0e-70a51bfd53c9.png  swapped_8ada8554-2649-48dd-a921-26be508b06d2.png  swapped_df46d1f2-8605-4c0c-8e24-7b8f251ff188.png
-swapped_352d2df2-4598-4ed6-be77-f5a75fd7f0e0.png  swapped_8b01ebb3-90c6-4e0c-9967-47a7f0a77695.png  swapped_e0875f10-0e94-4c26-b499-2a2fa262ebd4.png
-swapped_360fa7c7-6f81-4ef3-ac52-f2e9f9297ae2.png  swapped_8b13c40f-7ad0-42b8-ab8f-e0181940d9b3.png  swapped_e0f5dec5-4938-4b2f-8cf9-dbe4073e31f1.png
-swapped_37bbd471-5b26-4a43-a51a-fd1260029318.png  swapped_8b2ec3f1-236d-4dd0-902d-6c9cef3a0ab4.png  swapped_e15187d5-a0ee-4a71-bb2e-8c68e3d3c34d.png
-swapped_38b3001b-8652-4876-a07f-4f16badff4e3.png  swapped_8c7095de-3dfc-4c45-a005-e9f1c3c6cae6.png  swapped_e2a8aafb-89c4-4b4b-aef5-dd44dc5687b9.png
-swapped_3911193d-7156-4b19-92e4-c4a2b2a9bf63.png  swapped_8d39aec0-d75e-44d7-840b-4254e85c6b1c.png  swapped_e4085f5b-387b-4421-b4aa-624ba288c1e8.png
-swapped_3c77dca7-2033-496f-abea-f17e5f7dab44.png  swapped_9109c443-c0d1-4e96-a230-f6ffb479e5d7.png  swapped_e4ebdefc-d6e8-442d-8c9f-8da8e8ffc961.png
-swapped_3df57f0f-159a-4a35-9336-83465006f944.png  swapped_911cb24b-d02a-460b-a955-fe60bd294a23.png  swapped_e5b963e7-f240-41d9-ad9d-36da7de687e2.png
-swapped_40c02b89-e7e1-4b29-ac88-ad989a01e7b0.png  swapped_91a283e6-6a48-4318-99e2-cad3453a0cd0.png  swapped_e649aa09-9ab6-4f1a-ba2a-8db6b579cd4f.png
-swapped_40c15886-8130-41c8-b495-5d6ef58f3d56.png  swapped_92f08265-3f8f-4c25-83a4-862f39fc81a8.png  swapped_e718dec1-55f5-4665-be75-17f253978459.png
-swapped_42916b02-54ca-4f14-882a-adf2568fed98.png  swapped_955ceea0-2b79-4a1f-b821-efbfa55eef1b.png  swapped_e7667c3a-76fa-434f-add0-1c9c5c6e7a6e.png
-swapped_42a73c3c-43ef-4690-ad1d-4edc5b6f1622.png  swapped_958eb0f2-0599-4819-89dd-5d2420ac419f.png  swapped_e8588ff9-6991-4cc8-b680-6c40e70a60c5.png
-swapped_437b891a-297e-48e0-b1d3-2ae2868b1008.png  swapped_96a80d9b-295b-4cc6-966e-aa6e0be30318.png  swapped_e8b95bbc-52bd-4683-85a4-15ff7999ca3f.png
-swapped_445afe3c-7eac-431b-83d7-a57b6bfeafc4.png  swapped_98e7217a-aa4b-4720-bca4-9cbc1a8e2b86.png  swapped_ea32aeec-87ca-4f92-acdd-f2ee3b05e100.png
-swapped_4486a1c3-f9dd-4b55-ba32-a7a8366ff4c5.png  swapped_990b5c1d-b8be-4f06-a7ca-37defd0541cf.png  swapped_eaf56c88-6b94-4f09-8851-a8aa35ed6662.png
-swapped_44cf5062-9a7c-4673-bcc0-a1f92b064424.png  swapped_99b26a5c-e5fd-415a-b737-639fff69f221.png  swapped_ec5060f1-4913-4d3c-a42c-ae59b4123d74.png
-swapped_4584f991-0027-4d7c-bd97-e6a4478a96f8.png  swapped_9a6421b0-e075-4085-86ab-a80b2763117f.png  swapped_ed5ebf72-223f-45f5-93cb-1f1ed29e21f1.png
-swapped_464e3a3f-2150-4cad-8577-0fde9b4a0189.png  swapped_9a866e7f-01fa-4ef7-ab99-5f5b8fab58e6.png  swapped_ef97a933-c767-415e-87ff-ab93ebb12a6a.png
-swapped_46979451-e0d0-4ef3-a9e0-a091b050c5c4.png  swapped_9b750567-45da-4144-a920-990efb36e4dd.png  swapped_efcb106d-0eee-45c9-b2e9-23e97385e2b6.png
-swapped_46cf9946-e51b-4cbf-99d4-1f10a7845880.png  swapped_9c37a69e-ef2b-4f00-af91-6febca958c28.png  swapped_f093e93e-e972-4985-af0e-535757a46f77.png
-swapped_47b49159-b53b-4bba-b10a-e16ffcf2e8ff.png  swapped_a063dfba-f914-4449-ae8a-9474f02ddcee.png  swapped_f0f235e0-897a-4022-98c3-7e461b754731.png
-swapped_4923c658-4b1e-49d0-877f-0fc3eaf0602d.png  swapped_a374fe6c-1588-48f6-94cf-cf8b36a6f8ab.png  swapped_f1f800ca-f8c1-4961-bbd7-1b746d974861.png
-swapped_4d211dc8-e5b4-4141-8d36-2d0f5f26f945.png  swapped_a3935192-15a2-4d76-8d6c-a40df45966dd.png  swapped_f2fe340d-b54a-4f47-a6e7-9868358e3b40.png
-swapped_4e5f72ca-d071-4e12-a9fb-024044c2fd11.png  swapped_a440f1b3-ec57-4899-bc27-fb88a048995f.png  swapped_f343a618-113c-4f28-9590-7231c1776ce0.png
-swapped_51d43c20-03ad-4d6d-b4cc-a7fc856ca5b1.png  swapped_a4b22085-a52a-4904-bf5f-49c425324fc2.png  swapped_f385f908-a40e-4ae6-a369-8e7a1005a646.png
-swapped_5274aa2b-f851-4df3-8964-2a1953f60496.png  swapped_a7f4439c-136e-40b2-9c2b-aa06523386fd.png  swapped_f6c72d3e-25b4-42f2-95ac-c4316bf16b5e.png
-swapped_555f3638-0aa1-41a2-a2a5-20b4ac1b12ab.png  swapped_a8cee451-5d1b-4788-82a5-5d772c71de8f.png  swapped_f7647ba9-7b72-4f6c-88f4-846cca59761f.png
-swapped_55c7481d-741f-40d9-b24c-0ae52a661ffc.png  swapped_a94840b3-5ac1-4362-8234-c4c4f0e06f9e.png  swapped_f79f5e46-99b4-4162-9e60-ba1249f33ea0.png
-swapped_56958f5c-4b41-4c24-837c-78b7c205a566.png  swapped_a94d539c-d08c-4b0d-9b2a-0c145600f114.png  swapped_f7bfe033-6891-4aea-ba16-d9f432597303.png
-swapped_56a7900b-7527-467f-ac46-5538a7f7d391.png  swapped_a9f0c275-aa8d-41ac-b9f7-d95e9bd1fffc.png  swapped_f7ec8354-dbb3-4fa6-9377-e25f54bc3f02.png
-swapped_58632141-a4c4-4ffe-adab-a96f0e4a3acd.png  swapped_aa84ddfd-612b-491b-a056-35bc0e1e3698.png  swapped_f925dd8e-70ae-413c-94d3-116086f42715.png
-swapped_5aced0bb-32b7-4f87-b020-a73554e30e63.png  swapped_aa8a801a-9d85-4aff-82e4-0605104965f9.png  swapped_f974f886-da08-4d9e-9840-1c4487aa3a8f.png
-swapped_5c0bea86-41e8-4d65-b6c6-1e725b670048.png  swapped_ab5b135e-38f6-4994-b52b-7cfda7a8a452.png  swapped_fd0a2206-3a2e-42c3-a2ac-126999fd1145.png
-swapped_5e2ffed7-dc72-4ae7-b9c7-cf713e484808.png  swapped_ad899608-5f60-4e28-b3b7-aeed4ac759bc.png  swapped_fe0865fe-9e9f-468f-ac44-7a9999cf3a8c.png
-swapped_5ec6437f-41b0-4abb-b485-03a4a9961ed6.png  swapped_aef85abb-f462-4a33-90c4-de888fc84bcf.png  swapped_ff4076c8-016c-42e6-b591-5796a785c597.png
-swapped_5f08b9e4-76d1-47b0-86c8-820aaced7685.png  swapped_af8466ac-ef0d-4365-b92a-befb5709166c.png  swapped_ffcccbf7-3b4d-46f1-b195-a1439d3dcee6.png
-swapped_603ec8cc-afa2-4d2e-b248-aa1362ee6610.png  swapped_b1a4e979-a431-4d5f-aab5-05368bcadffa.png  swapped_hinhgocyaya.jpg
-swapped_60db0aec-6efe-4a46-a56d-3cee572c5f7a.png  swapped_b4a1be9a-02b0-40d0-91cf-8cbd2f3f593c.png
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="https://photo.sydneyonlineuniversity.org/static/favicon.png">
 
+    <!-- Open Graph Meta Tags for Social Sharing -->
+    <meta property="og:title" content="StudioHer">
+    <meta property="og:description" content="Tự tạo ảnh sống ảo, phông bạt miễn phí trong 3 giây. Studio sống ảo. Hình đẹp lấy ngay, thợ chụp khỏi hẹn ngày">
+    <meta property="og:image" content="https://photo.sydneyonlineuniversity.org/static/thumbnail.png">
+    <meta property="og:url" content="https://photo.sydneyonlineuniversity.org/">
+    <meta property="og:type" content="website">
