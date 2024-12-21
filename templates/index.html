@@ -4,9 +4,39 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FaceSwap App</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="https://photo.sydneyonlineuniversity.org/static/favicon.png">
+
+    <!-- Open Graph Meta Tags for Social Sharing -->
+    <meta property="og:title" content="StudioHer">
+    <meta property="og:description" content="Tự tạo ảnh sống ảo, phông bạt miễn phí trong 3 giây. Studio sống ảo. Hình đẹp lấy ngay, thợ chụp khỏi hẹn ngày">
+    <meta property="og:image" content="https://photo.sydneyonlineuniversity.org/static/thumbnail.png">
+    <meta property="og:url" content="https://photo.sydneyonlineuniversity.org/">
+    <meta property="og:type" content="website">
+
+    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+
     <style>
+        body {
+            background-color: #f8f9fa;
+        }
+
+        /* Top Banner Styling */
+        .top-banner {
+            text-align: center;
+            padding: 10px;
+            background-color: #e9ecef;
+            margin-bottom: 15px;
+        }
+
+        .top-banner img {
+            max-width: 100%;
+            height: auto;
+        }
+
         .image-gallery {
             display: flex;
             flex-wrap: wrap;
@@ -49,204 +79,71 @@
         .spinner-border {
             display: none;
         }
-
-        /* Custom header style */
-        .header {
-            background-color: #007bff;
-            color: white;
-            padding: 20px;
-            border-radius: 8px;
-            margin-bottom: 30px;
-        }
-
-        .header i {
-            font-size: 2rem;
-            margin-right: 10px;
-        }
-
-        .header h1 {
-            display: inline-block;
-            margin-bottom: 0;
-        }
-        .upload-file{
-            margin: 10px auto;
-            padding: 10px;
-
-        }
     </style>
 </head>
 <body class="bg-light">
 
-<div class="container py-5">
-    <!-- Updated Header with Icon and Styling -->
-    <div class="header text-center">
-        <i class="bi bi-image-alt"></i>
-        <h1>Studio sống ảo</h1>
-        <p>Hình đẹp lấy ngay, thợ chụp khỏi hẹn ngày</p>
+    <!-- Top Sponsor Banner -->
+    <div class="top-banner">
+        <img src="/static/top-banner.jpg" alt="Top Sponsor">
     </div>
 
-    <div class="upload-file text-center">
-        <br/>
-        <h5>Bước 1. Chọn mẫu bạn yêu thích</h5>
-        <p>Chọn chủ đề (xmas, creative, ...), sau đó chọn ảnh mẫu bạn muốn chụp</p>
-        <p>App có sử dụng hình ảnh trên mạng từ nhiều nguồn. Chân thành cảm ơn các bạn đã tạo ra các hình ảnh đẹp này nhé.</p>
-    </div>
-        
-  <!-- Bootstrap Tabs for Albums -->
-<ul class="nav nav-tabs" id="imageTabs" role="tablist">
-    {% for album, images in albums.items() %}
-        {% if album != 'uploads' and  album != 'results' %}  <!-- Exclude the 'uploads' folder -->
-            <li class="nav-item" role="presentation">
-                <a class="nav-link {% if loop.first %}active{% endif %}" id="tab-{{ album }}-tab" data-bs-toggle="tab" href="#tab-{{ album }}" role="tab" aria-controls="tab-{{ album }}" aria-selected="true">{{ album }}</a>
-            </li>
-        {% endif %}
-    {% endfor %}
-</ul>
-<div class="tab-content mt-4" id="imageTabsContent">
-    {% for album, images in albums.items() %}
-        {% if album != 'uploads' and  album != 'results' %}  <!-- Exclude the 'uploads' folder -->
-            <div class="tab-pane fade {% if loop.first %}show active{% endif %}" id="tab-{{ album }}" role="tabpanel" aria-labelledby="tab-{{ album }}-tab">
-                <div class="image-gallery">
-                    {% for image in images %}
-                        <img src="{{ url_for('static', filename=image) }}" alt="Ảnh mẫu" class="target-image" onclick="selectImage(this)">
-                    {% endfor %}
-                </div>
-            </div>
-        {% endif %}
-    {% endfor %}
-</div>
+    <div class="container py-5">
+        <!-- Header Section -->
+        <div class="header text-center">
+            <i class="bi bi-image-alt"></i>
+            <h1>Studio sống ảo</h1>
+            <p>Hình đẹp lấy ngay, thợ chụp khỏi hẹn ngày</p>
+        </div>
 
+        <!-- Upload Instructions -->
+        <div class="upload-file text-center">
+            <h5>Bước 1. Chọn mẫu bạn yêu thích</h5>
+            <p>Chọn chủ đề (xmas, creative, ...), sau đó chọn ảnh mẫu bạn muốn chụp</p>
+        </div>
 
+        <!-- Album Tabs -->
+        <ul class="nav nav-tabs" id="imageTabs" role="tablist">
+            {% for album, images in albums.items() %}
+                {% if album != 'uploads' and album != 'results' %}
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link {% if loop.first %}active{% endif %}" id="tab-{{ album }}-tab" data-bs-toggle="tab" href="#tab-{{ album }}" role="tab" aria-controls="tab-{{ album }}" aria-selected="true">{{ album }}</a>
+                    </li>
+                {% endif %}
+            {% endfor %}
+        </ul>
 
-    <!-- Upload and Generate Section -->
-    <div class="upload-file text-center">
-        <br/>
-        <h5>Bước 2. Tải file hình của bạn lên</h5>
-        <p>Hình có chứa khuân mặt chụp thẳng, rõ nét</p>
-        <input type="file" id="userImage" accept="image/*" class="form-control w-50 mx-auto mb-3">
-        <button id="generateButton" class="btn btn-primary" onclick="generateFaceSwap()" disabled>Tạo ảnh</button>
-        <br/><br/>
-        <p>Lưu ý: nút Tạo ảnh chỉ có thể hoạt động khi bạn đã chọn mẫu ảnh, và chọn ảnh tải lên</p>
-        <p>Nếu có lỗi xảy ra, vui lòng chờ khoảng 5s, sau đó làm lại</p>
-        <div class="spinner-border text-primary" id="spinner" role="status">
-            <span class="visually-hidden">Loading...</span>
+        <div class="tab-content mt-4" id="imageTabsContent">
+            {% for album, images in albums.items() %}
+                {% if album != 'uploads' and album != 'results' %}
+                    <div class="tab-pane fade {% if loop.first %}show active{% endif %}" id="tab-{{ album }}" role="tabpanel" aria-labelledby="tab-{{ album }}-tab">
+                        <div class="image-gallery">
+                            {% for image in images %}
+                                <img src="{{ url_for('static', filename=image) }}" alt="Ảnh mẫu" class="target-image" onclick="selectImage(this)">
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+
+        <!-- Upload Section -->
+        <div class="upload-file text-center">
+            <h5>Bước 2. Tải file hình của bạn lên</h5>
+            <input type="file" id="userImage" accept="image/*" class="form-control w-50 mx-auto mb-3">
+            <button id="generateButton" class="btn btn-primary" onclick="generateFaceSwap()" disabled>Tạo ảnh</button>
+        </div>
+
+        <!-- Results Section -->
+        <div class="mt-5 text-center">
+            <h5>Ảnh kết quả</h5>
+            <div class="result"></div>
         </div>
     </div>
 
-    <!-- Result Section -->
-    <div class="mt-5">
-        <h5 class="text-center">Ảnh kết quả</h5>
-        <div class="result">
-            <!-- Images will be appended here -->
-        </div>
-    </div>
-</div>
-
-<!-- Badge Code - Do Not Change The Code -->
-<a class="hitCounter" href="https://visitorshitcounter.com/" target="_blank" title="Hit counter" data-name="f0ae812168f9de0e140995d14bbc5ccd|5|external|10000|#0099cc|#f5f5f5|small|s-hit">Hit Counter</a><script>document.write("<script type='text/javascript' src='https://visitorshitcounter.com/js/hitCounter.js?v="+Date.now()+"'><\/script>");</script>
-<!-- Badge Code End Here -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Add your JavaScript logic here
+    </script>
 </body>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<script>
-    let selectedImage = null;
-
-    // Enable the Generate button when both images are selected
-    function enableGenerateButton() {
-        const userImage = document.getElementById('userImage').files.length > 0;
-        document.getElementById('generateButton').disabled = !(userImage && selectedImage);
-    }
-
-    // Select sample image
-    function selectImage(imageElement) {
-        document.querySelectorAll('.target-image').forEach(img => img.classList.remove('selected'));
-        imageElement.classList.add('selected');
-        selectedImage = imageElement.src;
-        enableGenerateButton();
-    }
-
-    // Handle user image upload
-    document.getElementById('userImage').addEventListener('change', enableGenerateButton);
-
- // Generate FaceSwap using fetch API
-async function generateFaceSwap() {
-    let userImage = document.getElementById('userImage').files[0];
-    if (!userImage || !selectedImage) {
-        alert('Hãy chọn ảnh mẫu và upload ảnh của bạn!');
-        return;
-    }
-
-    const spinner = document.getElementById('spinner');
-    const generateButton = document.getElementById('generateButton');
-    spinner.style.display = 'inline-block';
-    generateButton.disabled = true;
-
-    let formData = new FormData();
-    formData.append('file', userImage);
-    formData.append('target_image', selectedImage);
-
-    try {
-        // Step 1: Upload the user image and selected target image to the server
-        const uploadResponse = await fetch('/upload', {
-            method: 'POST',
-            body: formData
-        });
-
-        if (!uploadResponse.ok) {
-            throw new Error('Upload failed');
-        }
-
-        const uploadData = await uploadResponse.json();
-
-        if (uploadData.error) {
-            throw new Error(uploadData.error);
-        }
-
-        // Step 2: Receive swapped image URL from the server
-        const swappedImageUrl = uploadData.swapped_image_url;
-
-        // Display swapped image in a card with a download button
-        const card = document.createElement('div');
-        card.classList.add('card');
-        
-        const img = document.createElement('img');
-        img.src = swappedImageUrl;
-        img.alt = "Ảnh kết quả";
-
-        const cardBody = document.createElement('div');
-        cardBody.classList.add('card-body');
-        
-        // const downloadButton = document.createElement('button');
-        // downloadButton.innerHTML = `<i class="bi bi-download"></i> Download`;
-        // downloadButton.classList.add('btn', 'btn-primary', 'mt-2');
-        
-        // // Create the Blob and download functionality
-        // downloadButton.addEventListener('click', async () => {
-        //     try {
-        //         const response = await fetch(swappedImageUrl);
-        //         const blob = await response.blob();
-        //         const link = document.createElement('a');
-        //         link.href = URL.createObjectURL(blob);
-        //         link.download = 'swapped_image.png'; // Specify the file name
-        //         link.click(); // Trigger download
-        //     } catch (error) {
-        //         console.error('Error downloading the image:', error);
-        //         alert('Failed to download the image.');
-        //     }
-        // });
-        // cardBody.appendChild(downloadButton);
-
-        card.appendChild(img);
-        card.appendChild(cardBody);
-        document.querySelector('.result').appendChild(card);
-
-    } catch (error) {
-        console.error('Error:', error);
-        alert('Đã có lỗi xảy ra trong quá trình xử lý ảnh!');
-    } finally {
-        spinner.style.display = 'none';
-        generateButton.disabled = false;
-    }
-}
-
-</script>
 </html>
