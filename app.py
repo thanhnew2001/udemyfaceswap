@@ -41,33 +41,65 @@ def index():
 
     return render_template('index.html', albums=albums)
 
-@app.route('/upload', methods=['GET', 'POST'])
+@app.route('/upload', methods=['POST'])
 def upload():
-    if request.method == 'POST':
-        if 'file' not in request.files:
-            return jsonify({'error': 'No file part'}), 400
-        file = request.files['file']
-        if file.filename == '':
-            return jsonify({'error': 'No selected file'}), 400
-        if file and allowed_file(file.filename):
-            filename = secure_filename(file.filename)
-            album_name = request.form.get('album_name')
-            album_path = os.path.join(app.config['UPLOAD_FOLDER'], album_name)
-            if not os.path.exists(album_path):
-                return jsonify({'error': 'Album does not exist'}), 404
-            file_path = os.path.join(album_path, filename)
-            file.save(file_path)
+    if 'file' not in request.files:
+        return jsonify({'error': 'No file part'}), 400
+    file = request.files['file']
+    if file.filename == '':
+        return jsonify({'error': 'No selected file'}), 400
+    if file and allowed_file(file.filename):
+        filename = secure_filename(file.filename)
+        file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+        file.save(file_path)
 
-            # Display all photos of the selected album
-            album_images = [
-                f"{album_name}/{f}" for f in os.listdir(album_path) if allowed_file(f)
-            ]
+        # Get target image URL from the form
+        target_image_url = request.form.get('target_image')
 
-            return jsonify({'success': 'File uploaded successfully', 'album_images': album_images}), 200
+        input_data = {
+            "local_source": f"{request.host_url}{file_path}",
+            "local_target": target_image_url
+        }
 
-    # If GET request, show the upload form with album selection
-    albums = [d for d in os.listdir(PHOTO_FOLDER) if os.path.isdir(os.path.join(PHOTO_FOLDER, d))]
-    return render_template('upload.html', albums=albums)
+        try:
+            output = replicate.run(
+                "xiankgx/face-swap:cff87316e31787df12002c9e20a78a017a36cb31fde9862d8dedd15ab29b7288",
+                input=input_data
+            )
+            print(output)
+
+            # Assuming 'image' is the URL of the processed image
+            swapped_image_url = output['image']
+            response = requests.get(swapped_image_url)
+
+            if response.status_code == 200:
+                # Save the swapped image on the server
+                unique_id = uuid.uuid4()
+                generated_filename = f"swapped_{unique_id}.png"
+                generated_file_path = os.path.join(app.config['RESULT_FOLDER'], generated_filename)
+                with open(generated_file_path, 'wb') as f:
+                    f.write(response.content)
+                   # Force HTTPS in the response URL
+                    # if request.is_secure:
+                    #     protocol = 'https://'
+                    # else:
+                    #     protocol = 'https://'  # Force https even if the request is HTTP
+                    
+                    # Construct the full URL of the generated image
+                    swapped_image_url = f"https://{request.host}{generated_file_path}"
+
+                # Return the path of the saved image
+                return jsonify({
+                    'swapped_image_url': f"{request.host_url}{generated_file_path}"
+                })
+            else:
+                return jsonify({'error': 'Failed to download the generated image'}), 500
+        except Exception as e:
+            print("Error calling Replicate API:", e)
+            return jsonify({'error': 'An error occurred while processing the request'}), 500
+
+    return jsonify({'error': 'File type not allowed'}), 400
+
 
 @app.route('/create_album', methods=['POST'])
 def create_album():
