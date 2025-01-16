@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Manage Albums</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .album-image {
+            width: 100%;
+            height: auto;
+            max-width: 200px;
+            margin: 10px;
+        }
+        .container{
+            margin: 0 auto;
+            width: 90%;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-5">Manage Albums</h1>
+        <div class="card mt-4">
+            <div class="card-body">
+                <h2>Upload Photos to Album</h2>
+                <form id="upload-photo-form">
+                    <div class="form-group">
+                        <label for="album_name_upload">Album Name:</label>
+                        <select class="form-control" id="album_name_upload" name="album_name" required onchange="fetchAlbumImages()">
+                            <option value="">Select an album</option>
+                            {% for album in albums %}
+                                <option value="{{ album }}">{{ album }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="files">Choose files:</label>
+                        <input type="file" class="form-control-file" id="files" name="files" multiple required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Upload Photos</button>
+                </form>
+            </div>
+        </div>
+
+      
+
+        <div class="card mt-4">
+            <div class="card-body">
+                <h2>Delete Photos</h2>
+                <button class="btn btn-danger mb-3" onclick="deleteSelectedPhotos()">Delete Selected Photos</button>
+                <div id="album-images" class="row">
+                    <!-- Images will be displayed here -->
+                </div>
+            </div>
+        </div>
+
+        <div class="card mt-4">
+            <div class="card-body">
+                <h2>Create New Album</h2>
+                <form id="create-album-form">
+                    <div class="form-group">
+                        <label for="album_name">Album Name:</label>
+                        <input type="text" class="form-control" id="album_name" name="album_name" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Create Album</button>
+                </form>
+            </div>
+        </div>
+
+        
+        <div class="card mt-4">
+            <div class="card-body">
+                <h2>Rename Album</h2>
+                <form id="rename-album-form">
+                    <div class="form-group">
+                        <label for="old_name">Current Album Name:</label>
+                        <select class="form-control" id="old_name" name="old_name" required>
+                            <option value="">Select an album</option>
+                            {% for album in albums %}
+                                <option value="{{ album }}">{{ album }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="new_name">New Album Name:</label>
+                        <input type="text" class="form-control" id="new_name" name="new_name" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Rename Album</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('create-album-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const albumName = document.getElementById('album_name').value;
+            fetch('/create_album', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: `album_name=${albumName}`
+            })
+            .then(response => response.json())
+            .then(data => alert(data.success || data.error));
+        });
+
+        document.getElementById('upload-photo-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const albumName = document.getElementById('album_name_upload').value;
+            const files = document.getElementById('files').files;
+            const formData = new FormData();
+
+            for (let i = 0; i < files.length; i++) {
+                formData.append('files[]', files[i]);
+            }
+
+            fetch(`/upload_to_album/${albumName}`, {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert(data.success || data.error);
+                if (data.success) {
+                    fetchAlbumImages();
+                }
+            });
+        });
+
+        document.getElementById('rename-album-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const oldName = document.getElementById('old_name').value;
+            const newName = document.getElementById('new_name').value;
+            fetch('/rename_album', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: `old_name=${oldName}&new_name=${newName}`
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert(data.success || data.error);
+                if (data.success) {
+                    location.reload();  // Reload the page to update the album list
+                }
+            });
+        });
+
+        function fetchAlbumImages() {
+            const albumName = document.getElementById('album_name_upload').value;
+            if (albumName) {
+                fetch(`/get_album_images/${albumName}`)
+                .then(response => response.json())
+                .then(data => {
+                    const albumImagesDiv = document.getElementById('album-images');
+                    albumImagesDiv.innerHTML = '';
+                    if (data.images) {
+                        data.images.forEach(image => {
+                            const imgContainer = document.createElement('div');
+                            imgContainer.className = 'col-md-3';
+
+                            const imgElement = document.createElement('img');
+                            imgElement.src = `/static/${albumName}/${image}`;
+                            imgElement.className = 'album-image img-thumbnail';
+
+                            const checkbox = document.createElement('input');
+                            checkbox.type = 'checkbox';
+                            checkbox.value = image;
+                            checkbox.className = 'delete-checkbox';
+
+                            imgContainer.appendChild(imgElement);
+                            imgContainer.appendChild(checkbox);
+                            albumImagesDiv.appendChild(imgContainer);
+                        });
+                    } else {
+                        alert(data.error);
+                    }
+                });
+            }
+        }
+
+        function deleteSelectedPhotos() {
+            const albumName = document.getElementById('album_name_upload').value;
+            const checkboxes = document.querySelectorAll('.delete-checkbox:checked');
+            const filenames = Array.from(checkboxes).map(checkbox => checkbox.value);
+
+            if (filenames.length > 0) {
+                const promises = filenames.map(filename => {
+                    return fetch(`/delete_photo/${albumName}/${filename}`, {
+                        method: 'DELETE'
+                    }).then(response => response.json());
+                });
+
+                Promise.all(promises).then(results => {
+                    const messages = results.map(result => result.success || result.error).join('\n');
+                    alert(messages);
+                    fetchAlbumImages();
+                });
+            } else {
+                alert('No photos selected for deletion.');
+            }
+        }
+    </script>
+</body>
+</html>

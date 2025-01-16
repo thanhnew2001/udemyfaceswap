@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Enter Passphrase</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-5">Enter Passphrase</h1>
+        <form method="POST">
+            <div class="form-group">
+                <label for="passphrase">Passphrase:</label>
+                <input type="password" class="form-control" id="passphrase" name="passphrase" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+            {% if error %}
+                <div class="alert alert-danger mt-3">{{ error }}</div>
+            {% endif %}
+        </form>
+    </div>
+</body>
+</html>
