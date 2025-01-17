@@ -116,10 +116,12 @@
     {% for album, images in albums.items() %}
         {% if album != 'uploads' and  album != 'results' %}  <!-- Exclude the 'uploads' folder -->
             <div class="tab-pane fade {% if loop.first %}show active{% endif %}" id="tab-{{ album }}" role="tabpanel" aria-labelledby="tab-{{ album }}-tab">
-                <div class="image-gallery">
-                    {% for image in images %}
-                        <img src="{{ url_for('static', filename=image) }}" alt="Ảnh mẫu" class="target-image" onclick="selectImage(this)">
-                    {% endfor %}
+                <div class="image-gallery" data-album="{{ album }}">
+                    {% if loop.first %}
+                        {% for image in images %}
+                            <img src="{{ url_for('static', filename=image) }}" alt="Ảnh mẫu" class="target-image" onclick="selectImage(this)">
+                        {% endfor %}
+                    {% endif %}
                 </div>
             </div>
         {% endif %}
@@ -257,6 +259,33 @@ async function generateFaceSwap() {
         generateButton.disabled = false;
     }
 }
+
+// Load images for the selected tab
+document.querySelectorAll('.nav-link').forEach(tab => {
+    tab.addEventListener('click', async function() {
+        console.log('Loading images for:', this.getAttribute('aria-controls'));
+        
+        const album = this.getAttribute('aria-controls').replace('tab-', '');
+        const gallery = document.querySelector(`#tab-${album} .image-gallery`);
+        if (gallery && !gallery.dataset.loaded) {
+            try {
+                const response = await fetch(`/load_images?album=${album}`);
+                const images = await response.json();
+                images.forEach(image => {
+                    const img = document.createElement('img');
+                    img.src = image.url;
+                    img.alt = "Ảnh mẫu";
+                    img.classList.add('target-image');
+                    img.onclick = () => selectImage(img);
+                    gallery.appendChild(img);
+                });
+                gallery.dataset.loaded = true;
+            } catch (error) {
+                console.error('Error loading images:', error);
+            }
+        }
+    });
+});
 
 </script>
 </html>

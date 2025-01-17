@@ -190,5 +190,22 @@ def rename_album():
     os.rename(old_path, new_path)
     return jsonify({'success': 'Album renamed successfully'}), 200
 
+@app.route('/load_images')
+def load_images():
+    album = request.args.get('album')
+    if not album:
+        return jsonify({'error': 'Album not specified'}), 400
+
+    album_path = os.path.join(app.static_folder, album)
+    if not os.path.exists(album_path):
+        return jsonify({'error': 'Album not found'}), 404
+
+    images = []
+    for filename in os.listdir(album_path):
+        if filename.endswith(('.png', '.jpg', '.jpeg', '.gif', '.webp')):
+            images.append({'url': url_for('static', filename=os.path.join(album, filename))})
+
+    return jsonify(images)
+
 if __name__ == '__main__':
     app.run(debug=True, port=7000)
